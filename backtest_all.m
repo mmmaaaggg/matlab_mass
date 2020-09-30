@@ -19,7 +19,7 @@ for file_path=file_pathes
     file_num = file_num + 1;
     disp([num2str(file_num), ')文件：', file_path{1,1}]);
     [ohlc_num,~]=xlsread(file_path{1,1});  % 注意输入数据的格式-高开低收
-    output_img_path = [num2str(file_num), '.png'];
+    output_img_path = ['kdj_stg_', num2str(file_num), '.png'];
     backtest_hours(ohlc_num,xianhuo_num,ohlc_daily_num, ...
         enable_match_available_period, span_year, start_month_day, end_month_day, ...
         output_img_path);

@@ -181,6 +181,7 @@ for i=40:changdu
             is_avaliable = 0;
         end
         if is_avaliable == 0
+            smalltime_cangwei(i)=0;
             continue;
         end
     end
@@ -191,69 +192,75 @@ for i=40:changdu
     %      if ((xianhuo(i)>xianhuo(i-1))&(xianhuo2(i)>xianhuo2(i-1)))|(xianhuo(i)>=xianhuo(i-1)&xianhuo2(i)>=xianhuo2(i-1)&cangwei(i-1)>0) %¿ª²ÖµãÒªÇóÍ¬²½´óÓÚ×òÈÕ¼Û¸ñ 
     %     if qihuo(i)>=duan(i)&((xianhuo(i)>xianhuo(i-1))|(xianhuo(i)>=xianhuo(i-1)&cangwei(i-1)>0))   %ÆÚÏÖ½áºÏ 
 
+    % kdµÍÎ»½ð²æ×ö¶à
+    if (kzhi(i)>dzhi(i) && kzhi(i)<=30 && kzhi(i-1)<=dzhi(i-1))  %kd×ö¶à 
+        smalltime_cangwei(i)=1;
+    end           
+    
+    %     if macdzhuzhi(i)>0  %macd×ö¶à  jiagexinhao(i)&macdzhuzhi(i)>0
+    %         smalltime_cangwei(i)=1;
+    %     elseif dategtong(i)-dategtong(i-1)>300  %ÐèÒªÌÞ³ýºÏÔ¼µ½ÆÚ×ªÈëÏÂÄê»»ÔÂÒòËØ
+    %         smalltime_cangwei(i)=0;
+    %         i=i+huanyue;
+    %
+    %
+    %         % % % % %×ö¶à²ÖÎ»ÉèÖÃ
+    %         %        if  qihuo(i)-xianhuo(i)>shengshui   %×ö¶àÊ±ÉýË®½Ï´ó²ÖÎ»¼õ°ë
+    %         %             cangwei(i)=0.5;
+    %         %        end
+    %         %        if qihuo(i)>=chang(i)&qihuo(i)<(xianhuo(i)+shengshui) %ÆÚ»õ¸ßÓÚ60ÈÕÏßÇÒÉýË®Ð¡ÓÚ200£¬²ÖÎ»¼Ó±¶
+    %         %             cangwei(i)=2;
+    %         %        end
+    %
+    %         %         if    (xianhuo2(i)>xianhuo2(i-1))|(xianhuo2(i)==xianhuo2(i-1)&xishu2(i-1)>0)  %µÚ¶þ¸öÐÅºÅ¹ýÂË
+    %         %                  xishu2(i)=1;
+    %         %                  xishu22(i)=1;
+    %         %         end
+    %         %         if      (xianhuo3(i)>xianhuo3(i-1))|(xianhuo3(i)==xianhuo3(i-1)&xishu3(i-1)>0)  %µÚÈý¸öÐÅºÅ¹ýÂË
+    %         %                  xishu3(i)=1;
+    %         %                  xishu33(i)=1;
+    %         %         end
+    %         %         cangwei(i)=cangwei(i)*xishu22(i)*xishu33(i);
+    %
+    %     end
 
-    %    if jiagexinhao(i)&(kzhi(i)>dzhi(i)&kzhi(i)<=30&kzhi(i-1)<=dzhi(i-1))|(cangwei(i-1)==1&kzhi(i)>dzhi(i))  %kd×ö¶à 
-    if macdzhuzhi(i)>0  %macd×ö¶à  jiagexinhao(i)&macdzhuzhi(i)>0  
-        smalltime_cangwei(i)=1; 
-    elseif dategtong(i)-dategtong(i-1)>300  %ÐèÒªÌÞ³ýºÏÔ¼µ½ÆÚ×ªÈëÏÂÄê»»ÔÂÒòËØ
-        smalltime_cangwei(i)=0; 
-        i=i+huanyue;
-
-
-        % % % % %×ö¶à²ÖÎ»ÉèÖÃ      
-        %        if  qihuo(i)-xianhuo(i)>shengshui   %×ö¶àÊ±ÉýË®½Ï´ó²ÖÎ»¼õ°ë
-        %             cangwei(i)=0.5; 
-        %        end
-        %        if qihuo(i)>=chang(i)&qihuo(i)<(xianhuo(i)+shengshui) %ÆÚ»õ¸ßÓÚ60ÈÕÏßÇÒÉýË®Ð¡ÓÚ200£¬²ÖÎ»¼Ó±¶
-        %             cangwei(i)=2;
-        %        end
-
-        %         if    (xianhuo2(i)>xianhuo2(i-1))|(xianhuo2(i)==xianhuo2(i-1)&xishu2(i-1)>0)  %µÚ¶þ¸öÐÅºÅ¹ýÂË
-        %                  xishu2(i)=1; 
-        %                  xishu22(i)=1;
-        %         end
-        %         if      (xianhuo3(i)>xianhuo3(i-1))|(xianhuo3(i)==xianhuo3(i-1)&xishu3(i-1)>0)  %µÚÈý¸öÐÅºÅ¹ýÂË
-        %                  xishu3(i)=1; 
-        %                  xishu33(i)=1;
-        %         end
-        %         cangwei(i)=cangwei(i)*xishu22(i)*xishu33(i);
-
-    end
-
-    %    if ~jiagexinhao(i)&(kzhi(i)<dzhi(i)&kzhi(i)>=70&kzhi(i-1)>dzhi(i-1))|(cangwei(i-1)==-1&kzhi(i)<dzhi(i))   %kd×ö¿Õ 
-   if  macdzhuzhi(i)<0 %macd×ö¿Õ  ~jiagexinhao(i)&macdzhuzhi(i)<0
-       smalltime_cangwei(i)=-1;    
-     elseif dategtong(i)-dategtong(i-1)>300
-        smalltime_cangwei(i)=0;
-        i=i+huanyue;
-
-    % % % %%×ö¿Õ²ÖÎ»
-    %      if (xianhuo(i)<xianhuo(i-1))|(xianhuo(i)==xianhuo(i-1)&cangwei(i-1)<0)    %Ö»ÓÃÏÖ»õ
-    % %      if (xianhuo(i-1)<xianhuo(i-2))|(xianhuo(i-1)==xianhuo(i-2)&cangwei(i-1)<0)    %ÖÍºóÒ»Ìì¾ö²ß
-    %       if ((xianhuo(i)<xianhuo(i-1))&(xianhuo2(i)<xianhuo2(i-1)))|(xianhuo(i)<=xianhuo(i-1)&xianhuo2(i)<=xianhuo2(i-1)&cangwei(i-1)<0)     
-    %     if qihuo(i)<duan(i)&((xianhuo(i)<xianhuo(i-1))|(xianhuo(i)<=xianhuo(i-1)&cangwei(i-1)<0))      %ÆÚÏÖ½áºÏ     
-
-
-
-    % % % % % ×ö¿Õ²ÖÎ»ÉèÖÃ
-    %         if  qihuo(i)-xianhuo(i)<-tieshui   %×ö¿ÕÊ±ÌùË®½Ï´ó£¬²ÖÎ»¼õ°ë
-    %             cangwei(i)=-0.5;
-    %         end
-    %        if qihuo(i)<chang(i)&qihuo(i)>(xianhuo(i)-tieshui)
-    %            cangwei(i)=-2;
-    %        end
-
-    %       if  (xianhuo2(i)<xianhuo2(i-1))|(xianhuo2(i)==xianhuo2(i-1)&xishu2(i-1)<0)  %µÚ¶þ¸öÐÅºÅ¹ýÂË
-    %            xishu2(i)=-1; 
-    %            xishu22(i)=1;
-    %       end
-    %       if  (xianhuo3(i)<xianhuo3(i-1))|(xianhuo3(i)==xianhuo3(i-1)&xishu3(i-1)<0)  %µÚÈý¸öÐÅºÅ¹ýÂË
-    %            xishu3(i)=-1; 
-    %            xishu33(i)=1;
-    %       end
-    %        cangwei(i)=cangwei(i)*xishu22(i)*xishu33(i);
-
-    end
+        % kd¸ßÎ»ËÀ²æ×ö¿Õ
+    if (kzhi(i)<dzhi(i) && kzhi(i)>=70 && kzhi(i-1)>dzhi(i-1))   %kd×ö¿Õ 
+        smalltime_cangwei(i)=-1;
+    end  
+    %     if  macdzhuzhi(i)<0 %macd×ö¿Õ  ~jiagexinhao(i)&macdzhuzhi(i)<0
+    %         smalltime_cangwei(i)=-1;
+    %     elseif dategtong(i)-dategtong(i-1)>300
+    %         smalltime_cangwei(i)=0;
+    %         i=i+huanyue;
+    %
+    %         % % % %%×ö¿Õ²ÖÎ»
+    %         %      if (xianhuo(i)<xianhuo(i-1))|(xianhuo(i)==xianhuo(i-1)&cangwei(i-1)<0)    %Ö»ÓÃÏÖ»õ
+    %         % %      if (xianhuo(i-1)<xianhuo(i-2))|(xianhuo(i-1)==xianhuo(i-2)&cangwei(i-1)<0)    %ÖÍºóÒ»Ìì¾ö²ß
+    %         %       if ((xianhuo(i)<xianhuo(i-1))&(xianhuo2(i)<xianhuo2(i-1)))|(xianhuo(i)<=xianhuo(i-1)&xianhuo2(i)<=xianhuo2(i-1)&cangwei(i-1)<0)
+    %         %     if qihuo(i)<duan(i)&((xianhuo(i)<xianhuo(i-1))|(xianhuo(i)<=xianhuo(i-1)&cangwei(i-1)<0))      %ÆÚÏÖ½áºÏ
+    %
+    %
+    %
+    %         % % % % % ×ö¿Õ²ÖÎ»ÉèÖÃ
+    %         %         if  qihuo(i)-xianhuo(i)<-tieshui   %×ö¿ÕÊ±ÌùË®½Ï´ó£¬²ÖÎ»¼õ°ë
+    %         %             cangwei(i)=-0.5;
+    %         %         end
+    %         %        if qihuo(i)<chang(i)&qihuo(i)>(xianhuo(i)-tieshui)
+    %         %            cangwei(i)=-2;
+    %         %        end
+    %
+    %         %       if  (xianhuo2(i)<xianhuo2(i-1))|(xianhuo2(i)==xianhuo2(i-1)&xishu2(i-1)<0)  %µÚ¶þ¸öÐÅºÅ¹ýÂË
+    %         %            xishu2(i)=-1;
+    %         %            xishu22(i)=1;
+    %         %       end
+    %         %       if  (xianhuo3(i)<xianhuo3(i-1))|(xianhuo3(i)==xianhuo3(i-1)&xishu3(i-1)<0)  %µÚÈý¸öÐÅºÅ¹ýÂË
+    %         %            xishu3(i)=-1;
+    %         %            xishu33(i)=1;
+    %         %       end
+    %         %        cangwei(i)=cangwei(i)*xishu22(i)*xishu33(i);
+    %
+    %     end
 
 %     %¾ßÌåÆÚ»õºÏÔ¼01¡¢05¡¢09£¬²¿·ÖÊ±¼ä¶ÎÐèÒª¿Õ²Ö
 %     %01ºÏÔ¼ ½áÊøÈÕÆÚ£º11.15»ò11.30 £»¿ªÊ¼ÈÕÆÚ07.16£»¼´7.16-11.15
@@ -317,14 +324,15 @@ nianjunshouyilv=(zijin(end)/zijin(1))^(365/(dategtong(end)-dategtong(1)))-1;  %Ä
 kongcangjiaoyiri=length(find(zuizhongcangwei==0));
 disp(['¿Õ²Ö½»Ò×ÈÕ£º',num2str(kongcangjiaoyiri)]);
 zijin(end);
-disp(['Äê¾ù¸´ºÏÊÕÒæ£º',num2str(nianjunshouyilv),'    ½áÊø×Ê½ðÎª£º',num2str(zijin(end))]);
+disp(['Äê¾ù¸´ºÏÊÕÒæ£º',num2str(nianjunshouyilv),'    ½áÊø×Ê½ðÎª£º',num2str(zijin(end)), ' ¡ï']);
 % ×Ê½ðÇúÏß
 % semilogy(datekaicang,zijin)
-figure
-plot(dategtong,zijin)
+figure('visible','off');
+plot(dategtong,zijin);
 grid on
 dateaxis('x',12)
 saveas(gcf,output_img_path); %±£´æµ±Ç°´°¿ÚµÄÍ¼Ïñ
+
 [huichezijin,i1,i2]=maxdown(zijin);
 datestr(dategtong(i1),j);
 datestr(dategtong(i2),j);
@@ -364,7 +372,7 @@ kaicangyingkui=[0;diff(kaicangzijin)];
 %ÊÖÐø·ÑºÏ¼Æ
 shouxufeiheji=sum(shouxufei);
 %ÊÖÐø·Ñ±ÈÀý
-disp(['ÊÖÐø·Ñ±ÈÀý£º',num2str(shouxufeibili),'    ÊÖÐø·ÑºÏ¼Æ:',num2str(shouxufeiheji)]);
+disp(['ÊÖÐø·Ñ±ÈÀý£º',num2str(shouxufeibili),'    ÊÖÐø·ÑºÏ¼Æ:',num2str(shouxufeiheji), ' ¡ï']);
 %×î´óÁ¬ÐøÓ¯Àû´ÎÊý
 %Ë¼¿¼£ºÁ¬ÐøÓ¯Àû´ÎÊý·Ö²¼£¿
 lianxuylicishu=0;
